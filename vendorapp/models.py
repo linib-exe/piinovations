@@ -13,12 +13,23 @@ class Consignment(models.Model):
         ('Pre', 'Pre-Payment')
     ]
     consignment_payment_type = models.CharField(max_length=20, choices=consignment_payment_choices)
-    consignment_id = models.CharField(max_length=30, unique=True,null=True,blank=True)
+    # consignment_id = models.CharField(max_length=30, unique=True,null=True,blank=True)
 
-    def save(self,*args,**kwargs):
+    # def save(self,*args,**kwargs):
+    #     if self.consignment_id is None:
+    #         self.consignment_id = f'MI-{self.id}-{self.consignee_address}'
+    #     super().save(*args,**kwargs)
+
+    # def __str__(self):
+    #     return self.consignment_id
+
+    consignment_id = models.CharField(max_length=30, unique=True, null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)  # Save the instance first to populate the id field
         if self.consignment_id is None:
             self.consignment_id = f'MI-{self.id}-{self.consignee_address}'
-        super().save(*args,**kwargs)
+            self.save(update_fields=['consignment_id'])  # Save again to update the consignment_id field
 
     def __str__(self):
         return self.consignment_id

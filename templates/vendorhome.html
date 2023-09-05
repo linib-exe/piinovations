@@ -1,0 +1,13 @@
+<form method="POST">
+    {% csrf_token %}
+    <input type="text" name="consignee_name" placeholder="Consignee Name">
+    <input type="text" name="consignee_address" placeholder="Consignee Address">
+    <input type="text" name="consignee_phone" placeholder="Consignee Phone">
+    <input type="text" name="consignment_est_wt" placeholder="Consignment Weight">
+    <input type="text" name="consignment_value" placeholder="Consignment Value">
+    <select name="consignment_payment_type">
+        <option value="COD">COD</option>
+        <option value="Pre">Pre-Payment</option>
+      </select>
+    <input type="submit" placeholder="Submit">
+</form>
