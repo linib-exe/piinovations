@@ -42,27 +42,27 @@
             {% csrf_token %}
             <div class="form-group">
                 <label for="consignee_name">Consignee Name</label>
-                <input type="text" class="form-control" id="consignee_name" name="consignee_name" placeholder="Consignee Name">
+                <input type="text" class="form-control" id="consignee_name" name="consignee_name" placeholder="Consignee Name" value="{{consignment.consignee_name}}">
             </div>
             <div class="form-group">
                 <label for="consignee_address">Consignee Address</label>
-                <input type="text" class="form-control" id="consignee_address" name="consignee_address" placeholder="Consignee Address">
+                <input type="text" class="form-control" id="consignee_address" name="consignee_address" placeholder="Consignee Address" value="{{consignment.consignee_address}}">
             </div>
             <div class="form-group">
                 <label for="consignee_phone">Consignee Phone</label>
-                <input type="text" class="form-control" id="consignee_phone" name="consignee_phone" placeholder="Consignee Phone">
+                <input type="text" class="form-control" id="consignee_phone" name="consignee_phone" placeholder="Consignee Phone" value="{{consignment.consignee_phone}}">
             </div>
             <div class="form-group">
                 <label for="consignment_est_wt">Consignment Weight</label>
-                <input type="text" class="form-control" id="consignment_est_wt" name="consignment_est_wt" placeholder="Consignment Weight">
+                <input type="text" class="form-control" id="consignment_est_wt" name="consignment_est_wt" placeholder="Consignment Weight" value="{{consignment.consignment_est_wt}}">
             </div>
             <div class="form-group">
                 <label for="consignment_value">Consignment Value</label>
-                <input type="text" class="form-control" id="consignment_value" name="consignment_value" placeholder="Consignment Value">
+                <input type="text" class="form-control" id="consignment_value" name="consignment_value" placeholder="Consignment Value" value="{{consignment.consignment_value}}">
             </div>
             <div class="form-group">
                 <label for="consignment_payment_type">Consignment Payment Type</label>
-                <select class="form-control" id="consignment_payment_type" name="consignment_payment_type">
+                <select class="form-control" id="consignment_payment_type" name="consignment_payment_type" value="{{consignment.consignee_payment_type}}">
                     <option value="COD">COD</option>
                     <option value="Pre">Pre-Payment</option>
                 </select>
