@@ -8,4 +8,5 @@ urlpatterns = [
     path('vendor_delete_consignment/<int:id>', views.vendor_delete_consignment,name='deleteconsignment'),
     path('vendor_update_consignment/<int:id>', views.vendor_update_consignment,name='updateconsignment'),
     path('login/', views.login,name='login'),
+    path('register/', views.register,name='register'),
 ]

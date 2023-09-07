@@ -35,7 +35,10 @@ class Consignment(models.Model):
         return self.consignment_id
     
 class Vendor_Account(models.Model):
-    vendor_name = models.CharField(max_length=200)
+    vendor_firstname = models.CharField(max_length=200)
+    vendor_lastname = models.CharField(max_length=200)
+    vendor_username = models.CharField(max_length=20)
+    vendor_password = models.CharField(max_length=50)
     vendor_address = models.CharField(max_length=50)
     vendor_contact1 = models.CharField(max_length=10,unique=True)
     vendor_contact2 = models.CharField(max_length=10,blank=True,null=True)
