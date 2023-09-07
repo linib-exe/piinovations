@@ -33,5 +33,20 @@ class Consignment(models.Model):
 
     def __str__(self):
         return self.consignment_id
+    
+class Vendor_Account(models.Model):
+    vendor_name = models.CharField(max_length=200)
+    vendor_address = models.CharField(max_length=50)
+    vendor_contact1 = models.CharField(max_length=10,unique=True)
+    vendor_contact2 = models.CharField(max_length=10,blank=True,null=True)
+    vendor_id = models.CharField(max_length=20,unique=True,null=True,blank=True)
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)  # Save the instance first to populate the id field
+        if self.vendor_id is None:
+            self.vendor_id = f'MI-{self.id}-{self.vendor_address}'
+            self.save(update_fields=['vendor_id'])  # Save again to update the consignment_id field
+
+    def __str__(self):
+        return self.vendor_id
 
 

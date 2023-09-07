@@ -40,3 +40,6 @@ def vendor_update_consignment(request, id):
     else:
         # Pre-fill form fields with existing values
         return render(request, 'vendorhome.html', {'consignment': consignment})
+    
+def login(request):
+    return render(request,'login.html')
