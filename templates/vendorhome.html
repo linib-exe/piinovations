@@ -1,13 +1,79 @@
-<form method="POST">
-    {% csrf_token %}
-    <input type="text" name="consignee_name" placeholder="Consignee Name">
-    <input type="text" name="consignee_address" placeholder="Consignee Address">
-    <input type="text" name="consignee_phone" placeholder="Consignee Phone">
-    <input type="text" name="consignment_est_wt" placeholder="Consignment Weight">
-    <input type="text" name="consignment_value" placeholder="Consignment Value">
-    <select name="consignment_payment_type">
-        <option value="COD">COD</option>
-        <option value="Pre">Pre-Payment</option>
-      </select>
-    <input type="submit" placeholder="Submit">
-</form>
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Custom CSS for artistic styling and centering */
+        body {
+            background-color: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 400px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0069d9;
+            border-color: #0062cc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="consignee_name">Consignee Name</label>
+                <input type="text" class="form-control" id="consignee_name" name="consignee_name" placeholder="Consignee Name">
+            </div>
+            <div class="form-group">
+                <label for="consignee_address">Consignee Address</label>
+                <input type="text" class="form-control" id="consignee_address" name="consignee_address" placeholder="Consignee Address">
+            </div>
+            <div class="form-group">
+                <label for="consignee_phone">Consignee Phone</label>
+                <input type="text" class="form-control" id="consignee_phone" name="consignee_phone" placeholder="Consignee Phone">
+            </div>
+            <div class="form-group">
+                <label for="consignment_est_wt">Consignment Weight</label>
+                <input type="text" class="form-control" id="consignment_est_wt" name="consignment_est_wt" placeholder="Consignment Weight">
+            </div>
+            <div class="form-group">
+                <label for="consignment_value">Consignment Value</label>
+                <input type="text" class="form-control" id="consignment_value" name="consignment_value" placeholder="Consignment Value">
+            </div>
+            <div class="form-group">
+                <label for="consignment_payment_type">Consignment Payment Type</label>
+                <select class="form-control" id="consignment_payment_type" name="consignment_payment_type">
+                    <option value="COD">COD</option>
+                    <option value="Pre">Pre-Payment</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+        </form>
+    </div>
+
+    <!-- Include Bootstrap JS (jQuery and Popper.js are required dependencies) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
