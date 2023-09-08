@@ -33,8 +33,12 @@
             <form method="POST">
                 {% csrf_token %}
                 <div class="form-group">
-                    <label for="vendor_name">Vendor Name:</label>
-                    <input type="text" class="form-control" id="vendor_name" name="vendor_name" required>
+                    <label for="vendor_name">First Name:</label>
+                    <input type="text" class="form-control" id="vendor_name" name="firstname" required>
+                </div>
+                <div class="form-group">
+                    <label for="vendor_name">Last Name:</label>
+                    <input type="text" class="form-control" id="vendor_name" name="lastname" required>
                 </div>
                 <div class="form-group">
                     <label for="vendor_name">Username:</label>
@@ -46,15 +50,15 @@
                 </div>
                 <div class="form-group">
                     <label for="vendor_address">Vendor Address:</label>
-                    <input type="text" class="form-control" id="vendor_address" name="vendor_address" required>
+                    <input type="text" class="form-control" id="vendor_address" name="address" required>
                 </div>
                 <div class="form-group">
                     <label for="vendor_contact1">Vendor Contact 1:</label>
-                    <input type="text" class="form-control" id="vendor_contact1" name="vendor_contact1" required>
+                    <input type="text" class="form-control" id="vendor_contact1" name="contact1" required>
                 </div>
                 <div class="form-group">
                     <label for="vendor_contact2">Vendor Contact 2:</label>
-                    <input type="text" class="form-control" id="vendor_contact2" name="vendor_contact2">
+                    <input type="text" class="form-control" id="vendor_contact2" name="contact2">
                 </div>
                 <button type="submit" class="btn btn-primary btn-block">Register</button>
             </form>

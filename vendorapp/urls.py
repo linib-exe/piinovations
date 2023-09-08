@@ -7,6 +7,7 @@ urlpatterns = [
     path('vendor_consignment_list/', views.vendor_consignment_list,name='consignmentlist'),
     path('vendor_delete_consignment/<int:id>', views.vendor_delete_consignment,name='deleteconsignment'),
     path('vendor_update_consignment/<int:id>', views.vendor_update_consignment,name='updateconsignment'),
-    path('login/', views.login,name='login'),
-    path('register/', views.register,name='register'),
+    path('login/', views.loginVendor,name='login'),
+    path('register/', views.registerVendor,name='register'),
+    path('logout/', views.logout_view,name='logout'),
 ]

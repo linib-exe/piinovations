@@ -33,25 +33,37 @@
         .consignment-table tr:nth-child(odd) {
             background-color: #ffffff;
         }
+
+        .btn-fixed-width1 {
+        width: 200px; /* Adjust the width as needed */
+    }
+
+    .btn-fixed-width2 {
+        width: 150px; /* Adjust the width as needed */
+    }
     </style>
 </head>
 <body>
     <div class="container">
-        <form method="POST" class="d-flex justify-content-between">
-            {% csrf_token %}
-            <div class="input-group mb-3">
+        <div class="d-flex justify-content-between align-items-center">
+            <form method="POST" class="input-group mb-3">
+                {% csrf_token %}
                 <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="search-button">
                 <div class="input-group-append">
                     <button class="btn btn-outline-primary" type="button" id="search-button">Search</button>
                 </div>
-            </div>
-        </form>
-        <a href="{% url 'vendorhome' %}">
-            
-            <button type="button" class="btn btn-info">
-                <i class="fas fa-eye"></i> View
-            </button>
-            </a>
+                <a href="{% url 'vendorhome' %}" class="ml-2">
+                    <button type="button" class="btn btn-info">
+                        <i class="fas fa-eye"></i> Add Consignment
+                    </button>
+                </a>
+                <a href="{% url 'logout' %}" class="ml-2">
+                    <button type="button" class="btn btn-danger">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </a>
+            </form>
+        </div>
     </div>
 
     <table class="consignment-table table table-striped">
@@ -74,8 +86,8 @@
                     <td>{{ consignment.consignee_name }}</td>
                     <td>{{ consignment.consignee_address }}</td>
                     <td>{{ consignment.consignee_phone }}</td>
-                    <td>{{ consignment.consignment_est_wt }}</td>
-                    <td>{{ consignment.consignment_value }}</td>
+                    <td>{{ consignment.consignment_est_wt }} kg</td>
+                    <td>Rs. {{ consignment.consignment_value }}</td>
                     <td>{{ consignment.consignment_payment_type }}</td>
                     <td>
                         <a href="{% url 'updateconsignment' consignment.id %}">
@@ -84,6 +96,7 @@
                         </button>
                         </a>
                         <a href="{% url 'deleteconsignment' consignment.id %}">
+                        <!-- <a href="{% url 'deleteconsignment' consignment.id %}"> -->
                         <button type="button" class="btn btn-danger">
                             <i class="fas fa-trash-alt"></i>
                         </button>

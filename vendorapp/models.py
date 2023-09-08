@@ -1,8 +1,10 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.   
 
 class Consignment(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE,blank=True,null=True)
     consignee_name = models.CharField(max_length=200)
     consignee_address = models.CharField(max_length=200)
     consignee_phone = models.CharField(max_length=10)
@@ -43,6 +45,7 @@ class Vendor_Account(models.Model):
     vendor_contact1 = models.CharField(max_length=10,unique=True)
     vendor_contact2 = models.CharField(max_length=10,blank=True,null=True)
     vendor_id = models.CharField(max_length=20,unique=True,null=True,blank=True)
+    is_active = models.BooleanField(default=True,blank=True,null=True)
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)  # Save the instance first to populate the id field
         if self.vendor_id is None:

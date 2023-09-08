@@ -2,6 +2,8 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .models import Consignment,Vendor_Account
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def vendor_add_consignment(request):
@@ -17,20 +19,27 @@ def vendor_add_consignment(request):
                                   consignee_phone=consignee_phone,
                                   consignment_est_wt=consignment_est_wt,
                                   consignment_value=consignment_value,
-                                  consignment_payment_type=consignment_payment_type)
+                                  consignment_payment_type=consignment_payment_type,
+                                  user=request.user)
         consignment.save()
+
         return redirect('/vendor_consignment_list/')
     return render(request,'vendorhome.html')
-
+@login_required(login_url='login')
 def vendor_consignment_list(request):
-    consignmet = Consignment.objects.all()
+    user = request.user
+    consignmet = Consignment.objects.filter(user=user)
     return render(request,'consignmentlist.html',{'consignments':consignmet})
 
+@login_required(login_url='login')
 def vendor_delete_consignment(request,id):
     consignemnt = Consignment.objects.get(pk=id)
-    consignemnt.delete()
-    return redirect('/vendor_consignment_list/')
+    if request.method=='POST':
+        consignemnt.delete()
+        return redirect('/vendor_consignment_list/')
+    return render(request,'deleteAsk.html'  )
 
+@login_required(login_url='login')
 def vendor_update_consignment(request, id):
     consignment = Consignment.objects.get(pk=id)
     if request.method == 'POST':
@@ -47,10 +56,21 @@ def vendor_update_consignment(request, id):
         # Pre-fill form fields with existing values
         return render(request, 'vendorhome.html', {'consignment': consignment})
     
-def login(request):
-    return render(request,'login.html')
+def loginVendor(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('consignmentlist')  # Redirect to the home page or any other desired URL
+        else:
+            error_message = 'Invalid username or password'
+            return render(request, 'login.html', {'error_message': error_message})
+    else:
+        return render(request, 'login.html')
 
-def register(request):
+def registerVendor(request):
     if request.method=='POST':
         first_name = request.POST.get('firstname')
         last_name = request.POST.get('lastname')
@@ -63,10 +83,16 @@ def register(request):
                                 vendor_lastname=last_name,
                                 vendor_contact1=contact1,
                                 vendor_contact2=contact2,
-                                vendor_address=address,)
+                                vendor_address=address,
+                                vendor_username=username,
+                                vendor_password=password)
         vendor.save()
         user = User.objects.create_user(username=username, password=password)
         user.save()
         return redirect('login') 
 
     return render(request, 'register.html')
+
+def logout_view(request):
+    logout(request)
+    return redirect('login')
