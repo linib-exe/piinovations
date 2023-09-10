@@ -41,6 +41,11 @@
     .btn-fixed-width2 {
         width: 150px; /* Adjust the width as needed */
     }
+
+    .containerrr {
+    display: flex;
+    justify-content: flex-end;
+  }
     </style>
 </head>
 <body>
@@ -48,9 +53,9 @@
         <div class="d-flex justify-content-between align-items-center">
             <form method="POST" class="input-group mb-3">
                 {% csrf_token %}
-                <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="search-button">
+                <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="search-button" name="search">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-primary" type="button" id="search-button">Search</button>
+                    <input type="submit" class="btn btn-outline-primary" type="button" id="search-button">  
                 </div>
                 <a href="{% url 'vendorhome' %}" class="ml-2">
                     <button type="button" class="btn btn-info">
@@ -63,6 +68,9 @@
                     </button>
                 </a>
             </form>
+          
+                Welcome,{{user.username}}
+              
         </div>
     </div>
 
@@ -107,8 +115,12 @@
                         </button>
                         </a>
                     </td>
+                    {% empty %}
+                No Data Found
                 </tr>
+                
             {% endfor %}
+            
         </tbody>
     </table>
 

@@ -4,6 +4,7 @@ from .models import Consignment,Vendor_Account
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 
 # Create your views here.
 def vendor_add_consignment(request):
@@ -25,10 +26,20 @@ def vendor_add_consignment(request):
 
         return redirect('/vendor_consignment_list/')
     return render(request,'vendorhome.html')
+
 @login_required(login_url='login')
 def vendor_consignment_list(request):
     user = request.user
     consignmet = Consignment.objects.filter(user=user)
+    # for x in consignmet:
+    #     print(x.consignment_id)
+    if request.method == 'POST':
+        st = request.POST.get('search')
+        print(st)
+        if st!=None:
+            consignmet = Consignment.objects.filter(Q(user=user),
+                                                    Q(consignee_name__icontains=st)|
+                                                    Q(consignment_id__icontains=st))                                
     return render(request,'consignmentlist.html',{'consignments':consignmet})
 
 @login_required(login_url='login')
